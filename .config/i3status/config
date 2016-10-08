@@ -1,0 +1,83 @@
+general {
+    colors = true
+        interval = 5
+        color_good = '#6B73A9'
+        color_degraded = '#438064'
+        color_bad = '#B14D4C'
+        output_format = "i3bar"
+}
+
+#order += "disk /home"
+order += "volume master"
+order += "cpu_usage 0"
+#order += "cpu_temperature 0"
+#order += "cpu_temperature 1"
+#order += "ipv6"
+#order += "run_watch DHCP"
+#order += "run_watch VPN"
+order += "load"
+#order += "wireless wlp7s0"
+order += "ethernet ens33"
+order += "battery 0"
+order += "tztime local"
+
+wireless wlp7s0 {
+    format_up = " %essid %quality"
+        format_down = " -down"
+}
+
+ethernet ens33 {
+    format_up = "E: %ip (%speed)"
+        format_down = " - down"
+}
+
+battery 0 {
+    format = "%status %percentage"
+        last_full_capacity = true
+        low_threshold = 20
+        integer_battery_capacity = true
+}
+
+cpu_usage {
+    format = "   %usage"
+}
+
+run_watch DHCP {
+    pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+    pidfile = "/var/run/vpnc/pid"
+}
+
+tztime local {
+    format = "%d/%m %I:%M %p"
+}
+
+load {
+    format = "%1min"
+}
+
+disk "/home" {
+    format = "  %free"
+}
+
+#cpu_temperature 0 {
+#    format = "%degrees°C"
+#        max_threshold = 70
+#        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input"
+#}
+
+#cpu_temperature 1 {
+#    format = "%degrees°C"
+#        max_threshold = 70 
+#        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
+#}
+
+volume master {
+    format = "  %volume"
+        format_muted = "   muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}

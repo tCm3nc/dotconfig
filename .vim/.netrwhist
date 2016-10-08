@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/sigmoid/.config/i3'
+let g:netrw_dirhist_2='/home/sigmoid/.config/termite'
+let g:netrw_dirhist_3='/home/sigmoid/.config/i3'

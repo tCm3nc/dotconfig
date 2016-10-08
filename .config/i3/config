@@ -1,0 +1,219 @@
+set $mod Mod1
+
+font pango:Terminus 11px
+
+# Layout colors           bord      bg    text 
+client.focused #1F1F1F #505050 #BBBBBB #4F4F4F
+client.focused_inactive #1A1A1A #1A1A1A #424242 #121212
+client.unfocused #1A1A1A #1A1A1A #4F4F4F #1A1A1A
+client.urgent #1A1A1A #3B89B5 #a5a5a5 #1A1A1A
+client.background #121212
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+new_window 1pixel 
+new_float 1pixel
+
+bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+Shift+Return exec termite -e tmux 
+workspace_auto_back_and_forth yes
+
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+
+# Bind shortcuts
+bindsym $mod+Shift+q kill
+bindsym $mod+p exec firefox --private
+bindsym $mod+m bar mode toggle
+bindsym $mod+b exec i3lock -c "#121212"
+
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master '5%+'
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset  Master '5%-'
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioPlay exec mpc --quiet toggle
+bindsym XF86AudioStop exec mpc --quiet stop
+bindsym XF86AudioPrev exec mpc --quiet prev
+bindsym XF86AudioNext exec mpc --quiet next
+bindsym XF86TouchpadToggle exec touchpad
+
+# External Keyboard only
+bindsym $mod+F9 exec mpc --quiet toggle
+bindsym $mod+F8 exec mpc --quiet prev
+bindsym $mod+F10 exec mpc --quiet next
+bindsym $mod+F12 exec amixer -D pulse sset Master '5%+'
+bindsym $mod+F11 exec amixer -D pulse sset  Master '5%-'
+
+bindsym Print exec scrot '%F--%I:%M:%S:%p--$wx$h--scrot.png' -e 'mv $f /home/sigmoid/Pictures/scrot'
+
+bindsym $mod+Shift+m exec --no-startup-id termite --name=ncmpcpp -e ncmpcpp 
+bindsym $mod+Shift+z exec --no-startup-id mpdmenu.sh
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10%
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10%
+
+bindsym Control+$mod+Delete exec termite -e "htop"
+
+bindsym $mod+d exec dmenu_run -i -l 5 -p "> " -fn "terminus-9" -nb "#151515" -nf "#3B50BD" -sb "#272727" -sf "#797979" 
+
+# Scratchpad
+bindsym $mod+Shift+n move scratchpad
+bindsym $mod+n scratchpad show
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+c move absolute position center
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ograve move right
+
+# System Mode - 
+bindsym $mod+x mode "$mode_system"
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (x) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.config/i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/.config/i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/i3exit reboot, mode "default"
+    bindsym x exec --no-startup-id ~/.config/i3/i3exit shutdown, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Cycle through active workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# split in horizontal orientation
+bindsym $mod+o split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+q focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 0
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 0
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ograve resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bar {
+        status_command i3status 
+        font pango: Terminus, Icon 9
+        position top
+        colors {
+            background #080808 
+            statusline #808080
+            separator #808080
+            focused_workspace #080808 #222222 #808080
+            active_workspace #080808 #080808 #797979 
+            inactive_workspace #080808 #080808 #4F4F4F
+            urgent_workspace #080808 #080808 #EA4C59
+        }
+
+}
+
+# Statup applications
+exec --no-startup-id pulseaudio --start
+exec --no-startup-id mpd 
+exec --no-startup-id xset -b 
+exec --no-startup-id hsetroot -fill /home/sigmoid/Pictures/bg/bg.jpeg
+exec --no-startup-id connman-ui-gtk
+exec --no-startup-id dunst 
+exec xinput set-prop 11 275 -1
+exec_always --no-startup-id parcellite
+
+# Assign foo to workspaces 
+assign [class="Firefox"] 1
+assign [instance="ncmpcpp"] 3
+assign [instance="connect"] 1
+
+for_window [class="Firefox"] border none
+for_window [instance="weechat"] border none
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] border normal
+for_window [window_role="pop-up"] floating enable
+for_window [instance="mpd"] move scratchpad
+
+# Autostart
+#exec --no-startup-id i3-msg 'workspace 2; exec sh -c "termite"; exec sh -c "termite"; exec sh -c "termite --name=mpd -e "tmux new -s music""'
+#exec --no-startup-id i3-msg 'workspace 4; exec termite --name=weechat; workspace 1'
+
+# vim: set ft=conf ts=4 sw=4 tw=500 et :
+# vim:filetype=i3
